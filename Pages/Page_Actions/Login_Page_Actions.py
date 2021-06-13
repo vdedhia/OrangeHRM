@@ -67,7 +67,7 @@ class Login_Page(PageBase):
                 pwd.send_keys(TestData[1])
                 log.logger('INFO', 'Entered Username & Password')
                 Login_Button = self.driver.find_element(*LoginPage_XPaths['Login_Button'])
-                PageBase.save_image()
+                PageBase.save_image(self)
                 Login_Button.click()
                 self.implicitly_wait()
                 log.logger('INFO', 'Result should be ' + TestData[2])
@@ -75,13 +75,11 @@ class Login_Page(PageBase):
                     Logged_User = self.driver.find_element(*User_Details['Loggedin_User'])
                     log.logger('INFO', 'Logged User is ' + Logged_User.text)
                     Logged_User = Logged_User.text.split()
-                    if Logged_User[1] == 'Raj':
-                        assert Logged_User[1] == 'Raj'
-                    elif Logged_User[1] == 'Paul':
-                        assert Logged_User[1] == 'Paul'
+                    if Logged_User[1] in Config.Users.value:
+                        assert Logged_User[1] in Config.Users.value
                     else:
                         log.logger('ERROR', 'No Match Found')
-                    PageBase.save_image()
+                    PageBase.save_image(self)
                     self.implicitly_wait()
                     Login_Page.ResetPage(self)
                     self.implicitly_wait()
@@ -89,12 +87,12 @@ class Login_Page(PageBase):
                     Error_MSG = self.driver.find_element(*LoginPage_XPaths['Invalid_Login'])
                     log.logger('INFO', 'Logged User is ' + Error_MSG.text)
                     assert Error_MSG.text == 'Invalid credentials'
-                    PageBase.save_image()
+                    PageBase.save_image(self)
 
     def ResetPage(self):
         User = self.driver.find_element(*User_Details['User'])
-        Logout = self.driver.find_element(*User_Details['Logout'])
         User.click()
+        Logout = self.driver.find_element(*User_Details['Logout'])
         Logout.click()
         log.logger('INFO', 'Logged Out')
         self.driver.get(Config.Base_URL.value)
