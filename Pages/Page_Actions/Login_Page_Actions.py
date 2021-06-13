@@ -21,7 +21,7 @@ class Login_Page(PageBase):
         Password_Input.send_keys(password)
         log.logger('INFO', 'Entered Username & Password')
         Login_Button = self.driver.find_element(*LoginPage_XPaths['Login_Button'])
-        PageBase.save_image()
+        PageBase.save_image(self)
         Login_Button.click()
         log.logger('INFO', 'Logged in')
         self.implicitly_wait()
@@ -36,7 +36,7 @@ class Login_Page(PageBase):
             assert Logged_User[1] == 'Paul'
         else:
             log.logger('ERROR', 'No Match Found')
-        PageBase.save_image()
+        PageBase.save_image(self)
         self.implicitly_wait()
         log.logger('INFO', 'Test Completed')
 
@@ -44,7 +44,7 @@ class Login_Page(PageBase):
         log.logger('INFO', 'Validating Login')
         Error_MSG = self.driver.find_element(*LoginPage_XPaths['Invalid_Login'])
         log.logger('INFO', 'Logged User is ' + Error_MSG.text)
-        PageBase.save_image()
+        PageBase.save_image(self)
         assert Error_MSG.text == 'Invalid credentials'
 
     def Read_Testdata(self):
