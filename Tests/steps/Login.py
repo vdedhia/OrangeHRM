@@ -16,10 +16,10 @@ def step_impl(context):
         context.driver.get(Config.Base_URL.value)
 
 
-@when("User Logins with User details")
+@when("Logins with User details")
 def step_impl(context):
-    log.logger('INFO', 'Login page entering login details')
-    context.LoginPageAction.Do_LoginAction()
+    log.logger('INFO', 'Starting to Read from Test Data')
+    context.LoginPageAction.Read_Testdata()
 
 
 @when("User Logins with {Username} and {Password}")
@@ -36,3 +36,8 @@ def step_impl(context):
 @then("There should be an error MSG shown")
 def step_impl(context):
     context.LoginPageAction.Validate_Login()
+
+@then("Validate Login")
+def step_impl(context):
+    log.logger('INFO', 'Starting Tests')
+    context.LoginPageAction.TestData_Validate_Login()
