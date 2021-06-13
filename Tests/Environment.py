@@ -14,15 +14,18 @@ log = Logger()
 
 def before_all(context):
     log.logger('INFO', 'Executing before all')
+    assert context
 
 
 def before_feature(context, feature):
-    log.logger('INFO', 'Executing before feature')
+    log.logger('INFO', 'Executing before ' + str(feature))
+    assert context
 
 
 def get_driver_capabilities(context):
     browser = context.config.userdata.get("browser")
     log.logger('INFO', 'Executing on {} browser'.format(browser))
+    capabilities = None
     if browser == 'firefox':
         driver_path = './Drivers/geckodriver'
         capabilities = DesiredCapabilities.FIREFOX.copy()
@@ -41,7 +44,6 @@ def get_driver_capabilities(context):
             context.driver = webdriver.Chrome(executable_path=driver_path)
             if context.config.userdata.get("selenium_hub") == 'local':
                 context.driver = webdriver.Chrome(options=options)
-            capabilities = None
             capabilities = DesiredCapabilities.CHROME.copy()
     elif browser == 'safari':
         capabilities = DesiredCapabilities.SAFARI.copy()
@@ -86,7 +88,7 @@ def after_scenario(context, scenario):
 
 # noinspection PyUnusedLocal
 def after_feature(context, feature):
-    log.logger('INFO', 'Executing after feature')
+    log.logger('INFO', 'Executing after ' + str(feature))
 
 
 # noinspection PyUnusedLocal

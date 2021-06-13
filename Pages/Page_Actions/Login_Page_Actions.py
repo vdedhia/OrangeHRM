@@ -1,5 +1,3 @@
-from pandas._testing import assert_timedelta_array_equal
-
 from Pages.Base_Page import PageBase
 from Pages.Selectors.LoginPage_Selector import LoginPage_XPaths
 from Pages.Selectors.DashboardPage_Selector import User_Details
