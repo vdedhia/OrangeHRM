@@ -34,8 +34,10 @@ class PageBase:
                     sleep(delay_sec)
                 if not os.path.isdir('./Screenshot'):
                     os.makedirs('./Screenshot')
-                args[0].driver.save_screenshot('./Screenshot/' + str(args[0].image_cnt) + "_" + args[0].page_name + "_" +
-                                               str(datetime.now())[:-7].replace(" ", "_").replace(":", "_") + ".png")
+                args[0].driver.save_screenshot('./Screenshot/' + str(args[0].image_cnt) + "_" + args[0].page_name + "_"
+                                               + str(datetime.now())[:-7].replace(" ", "_").replace(":", "_") + ".png")
                 return value
+
             return wrapper
+
         return save_screenshot

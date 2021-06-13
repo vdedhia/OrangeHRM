@@ -75,9 +75,7 @@ def before_scenario(context, scenario):
     context.LoginPageAction = Login_Page(context.driver, 'Login Page ' + browser_name)
 
     log.logger('INFO', 'Opening the page')
-    # context.driver.get(Config.Base_URL.value)
     context.driver.maximize_window()
-    # context.login.implicitly_wait()
 
 
 # noinspection PyUnusedLocal
