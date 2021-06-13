@@ -16,10 +16,10 @@ def step_impl(context):
         context.driver.get(Config.Base_URL.value)
 
 
-@when("User Logins with correct details")
+@when("User Logins with User details")
 def step_impl(context):
     log.logger('INFO', 'Login page entering login details')
-    context.LoginPageAction.Do_LoginAction(Config.Test_User.value, Config.Test_Password.value)
+    context.LoginPageAction.Do_LoginAction()
 
 
 @when("User Logins with {Username} and {Password}")
