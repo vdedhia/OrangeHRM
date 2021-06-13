@@ -1,7 +1,5 @@
 import os
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from time import sleep
 from datetime import datetime
 
@@ -24,20 +22,8 @@ class PageBase:
     def get_opened_url(self):
         return self.driver.current_url
 
-    @staticmethod
-    def save_image(delay_sec=0):
-        def save_screenshot(method):
-            def wrapper(*args, **kwargs):
-                args[0].image_cnt += 1
-                value = method(*args, **kwargs)
-                if delay_sec != 0:
-                    sleep(delay_sec)
-                if not os.path.isdir('./Screenshot'):
-                    os.makedirs('./Screenshot')
-                args[0].driver.save_screenshot('./Screenshot/' + str(args[0].image_cnt) + "_" + args[0].page_name + "_"
-                                               + str(datetime.now())[:-7].replace(" ", "_").replace(":", "_") + ".png")
-                return value
-
-            return wrapper
-
-        return save_screenshot
+    def save_image(self):
+        if not os.path.isdir('./Screenshot'):
+            os.makedirs('./Screenshot')
+        self.driver.save_screenshot(
+            './Screenshot/' + str(datetime.now())[:-7].replace(" ", "_").replace(":", "_") + ".png")
