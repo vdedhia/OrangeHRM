@@ -25,3 +25,4 @@ After running Test Case, User needs to run `allure serve .\allure\results\` for 
 
 ###Known Issue
 1. Allure is not reporting trend correctly, as it works best with CI / CD
+2. TestData driven test cases are not properly captured in Allure as it is counting test scenario results (Need more time to debug this)
