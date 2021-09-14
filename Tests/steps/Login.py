@@ -37,6 +37,7 @@ def step_impl(context):
 def step_impl(context):
     context.LoginPageAction.Validate_Login()
 
+
 @then("Validate Login")
 def step_impl(context):
     log.logger('INFO', 'Starting Tests')
